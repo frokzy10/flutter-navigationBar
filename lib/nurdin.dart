@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,21 +40,96 @@ class MyScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Column(
-        children: [
-          MyAppBar(
-            title: Text(
-              'Nurdin boss',
-              style: Theme.of(context).primaryTextTheme.titleLarge,
+    return const Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            MyAppBar(
+              title: Text(
+                "Nurdin website",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ProductCard(
+                      title: "Product 1",
+                      description: "Description of Product 1",
+                      price: "150 сом",
+                    ),
+                    ProductCard(
+                      title: "Product 2",
+                      description: "Description of Product 2",
+                      price: "200 сом",
+                    ),
+                    ProductCard(
+                      title: "Product 3",
+                      description: "Description of Product 3",
+                      price: "250 сом",
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class ProductCard extends StatelessWidget {
+  final String title;
+  final String description;
+  final String price;
+
+  const ProductCard({
+    required this.title,
+    required this.description,
+    required this.price,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      height: 200,
+      child: Card(
+        margin: const EdgeInsets.all(10.0),
+        child: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                description,
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                price,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
-          const Expanded(
-            child: Center(
-              child: Text("Hello world"),
-            ),
-          )
-        ],
+        ),
       ),
     );
   }
@@ -60,9 +137,8 @@ class MyScaffold extends StatelessWidget {
 
 void main() {
   runApp(const MaterialApp(
-    title: "Mt app",
-    home: SafeArea(
-      child: MyScaffold(),
-    )
-  ));
+      title: "My app",
+      home: SafeArea(
+        child: MyScaffold(),
+      )));
 }
